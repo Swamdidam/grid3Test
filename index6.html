@@ -1,0 +1,77 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <p><br/><br/></p>
+    <div class="container">
+        <table class = "table table-bordered table-striped">
+            <thead>
+            <tr>
+                <th>COUNTRY</th>
+                <th>POPULATION</th>
+                <th>TIMEZONE</th>
+                <th>FLAG</th>
+            </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+    
+    <!-- importing the jQuery lib -->
+
+    <script src ="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    <script>
+        let $ = jQuery
+
+        //making api call for the counntry's list
+
+        jQuery.getJSON('https://restcountries.eu/rest/v2/region/africa', function(data){
+            var items = [];
+            console.log(data)
+            jQuery.each(data, function(key, val){
+                items.push("<tr>");
+                items.push("<td id =''"+key+" ''>"+ val.name+"</td>");
+                items.push("<td id =''"+key+" ''>"+ val.population+"</td>");
+                items.push("<td id =''"+key+" ''>"+ val.timezones+"</td>");
+                items.push("<td id =''"+key+" ''>"+ val.flag+"</td>");
+            });
+            jQuery("<tbody/>", {html: items.join("")}).appendTo("table")
+        })
+
+        //function for comparing the time difference
+
+        function viewOther(country){
+            let $ = jQuery
+            jQuery.getJSON('https://restcountries.eu/rest/v2/region/africa', function(data){
+                var items = [];
+                console.log(data)
+                return data
+
+            });
+            
+            let myTimeZone = '';//this valu will be either manually enter or from location api
+            let poi = ''; //this valu will be either manually enter or from location api
+
+            // converting the time zone string to numbers
+
+            myTimeZone  = parseFloat(myTimeZone);
+            poi = parseFloat(data.timezones)
+
+            if(myTimeZone - poi == 1 || myTimeZone - poi == -1){
+                return ('contact')
+            }else{
+                return ('wrong time to contact')
+            }
+
+
+
+        }
+
+    </script>
+</body>
+</html>
